@@ -25,7 +25,7 @@ const NavButton = ({ label, onClick }) => {
                 fontStyle: 'italic', 
                 cursor: 'pointer', 
                 boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-                transition: 'background-color 0.2s' // Add hover feedback
+                transition: 'background-color 0.2s'
             }}>
             <div>
                 <img src={bookIcon} alt="Book Icon" style={{ 
@@ -45,7 +45,7 @@ const NavButton = ({ label, onClick }) => {
     );
 };
 
-// --- Years Selection Page ---
+//Years Selection Page 
 const YearsSelection = ({ years }) => {
     return (
         <div style={{
@@ -104,7 +104,6 @@ function App() {
             overflow: 'hidden' 
         }}>
             
-            {/* --- TOP GREEN SECTION (75% height) --- */}
             <div style={{
                 backgroundColor: '#6D8883',
                 width: '100%',
@@ -119,7 +118,6 @@ function App() {
                 paddingBottom: '30px'
             }}>
                 
-                {/* Logo and Text Container */}
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -138,8 +136,6 @@ function App() {
                 {topContent()}
 
             </div>
-
-            {/* --- BOTTOM WHITE SECTION (25% height) --- */}
             <div style={{ 
                 height: '25vh', 
                 display: 'flex',
