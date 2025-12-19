@@ -1,173 +1,204 @@
 import React from "react";
+import girl from "./assets/Gemini_Generated_Image_gzbmb6gzbmb6gzbm-removebg-preview.png"; // illustration image
 import logo from "./assets/logo.png";
-import Illustration from "./assets/woman-7005175_1280.png";
-import Book from "./assets/Frame 6.png";
-
-const FirstPage =  ({ onNavigate }) => {
+import book from "./assets/Gemini_Generated_Image_5eb5hn5eb5hn5eb5-removebg-preview.png"
+import littlBook from "./assets/freepik__talk__97297-removebg-preview.png"
+const FirstPage = ({ onNavigate }) => {
   return (
-    <div className="page">
+    <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
         * {
           box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
         }
 
         body {
           margin: 0;
-        }
-
-        .page {
-          min-height: 100vh;
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #2f2f2f;
+          height: 100vh;
         }
 
-        .app-screen {
+        .phone-frame {
           width: 430px;
           height: 932px;
-          background-color: #F0F3F3;
-          overflow: hidden;
+        }
+
+        .screen {
+          height: 100%;
+          background: linear-gradient(180deg, #2f7f77 -14%, #cfeae7 100%);
           position: relative;
+          overflow: hidden;
+          padding: 20px;
         }
-
-        .header {
-          height: 70%;
-          width: 100%;
-          background-color: #6c8a83;
-          border-bottom-left-radius: 45px;
-          border-bottom-right-radius: 45px;
-          padding: 24px;
+        .logo { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .logo img { width: 390px;  }
+        /* Status bar */
+        .status-bar {
           display: flex;
-          flex-direction: column;
-        }
-
-      
-
-        .logo-container {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .logo-container img {
-          width: 280px;
-        }
-
-        .menu {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .menu-card {
-          height: 78px;
-          background-color: #4b605a;
-          border-radius: 22px;
-          display: flex;
-          align-items: center;
           justify-content: space-between;
-          padding: 0 24px;
-          color: white;
-          border: none;
+          color: #ffffff;
+          font-size: 14px;
+          margin-bottom: 10px;
+        }
+
+        /* Header */
+        .back-arrow {
+          color: #ffffff;
+          font-size: 20px;
+          margin-top: 10px;
           cursor: pointer;
-          font-family: 'Great Vibes', cursive;
-          font-size: 26px;
-          letter-spacing: 3px;
         }
 
-        .menu-left {
+
+
+        .dots {
           display: flex;
-          align-items: center;
-          gap: 14px;
+          gap: 6px;
         }
 
-        .footer {
-          position: absolute;
-          bottom: 0;
-          height: 30%;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        .dots span {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #ffffff;
         }
 
-        .cta {
-          background-color: #4b605a;
-          color: white;
-          width: 280px;
-          margin-left: 120px;
-          margin-top: 70px;
-          font-family: 'Great Vibes', cursive;
-          font-size: 28px;
-          padding: 14px 48px;
-          border-radius: 60px;
-          border: none;
-          cursor: pointer;
-          z-index: 2;
+        .placeholder {
+          flex: 1;
+          color: #ffffff;
+          font-size: 16px;
+          margin-left: 12px;
         }
 
+        .arrow {
+          font-size: 18px;
+          color: #ffffff;
+        }
+
+        /* Illustration */
         .illustration {
-          position: absolute;
-          right: 240px;
-          bottom: 70px;
-          width: 160px;
-          opacity: 0.9;
+          position: relative;
+          top: 70px;
+          right:20px;
         }
+
+        .illustration img {
+          width: 220px;
+          
+        }
+
+       /* Button */
+            .get-started {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family:"Handlee", cursive;
+
+            width: 80%;
+            height: 56px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 40px;
+
+            background: linear-gradient(
+              to right,
+              rgba(255, 255, 255, 0.35),
+              rgba(255, 255, 255, 0.15)
+            );
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border: 1px solid rgba(255, 255, 255, 0.5);
+
+            color: #0f3f3a;
+            font-size: 23px;
+            font-weight: 500;
+
+            box-shadow:
+              inset 0 1px 2px rgba(255, 255, 255, 0.6),
+              0 10px 25px rgba(0, 0, 0, 0.15);
+
+            cursor: pointer;
+          }
+        /* Home indicator */
+        .home-indicator {
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 120px;
+          height: 4px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.6);
+      }
+        .imagbook img {
+            width: 180px;
+            position: absolute;
+            bottom:110px;
+            right: 50px;
+            
+          }
+            .imaglittlBook img{
+                  width:580px;
+                  position: absolute;
+                  top:5px;
+                  right:5px;
+                  color:white;
+                  opacity: 0.15;
+                  pointer-events: none;
+            }
+          // .imagliiitlleBook img{ 
+          //         width:480px;         
+          //         position: absolute;
+          //         bottom: 200px;
+          //         right:50px;      
+          //         opacity: 0.15;         
+          //         transform: rotate(-10deg);
+          // }
+
+
       `}</style>
 
-      <div className="app-screen">
-        {/* Header */}
-        <div className="header">
-          {/* Status bar */}
-         
+      <div className="phone-frame">
+        <div className="screen">
 
           {/* Logo */}
-          <div className="logo-container">
-            <img src={logo} alt="Learnex Logo" />
+          <div className="logo">
+            <img src={logo} alt="logo" />
           </div>
-
-          {/* Menu */}
-          <div className="menu">
-            {/* Years button */}
-            <button className="menu-card" onClick={() => onNavigate("years")}>
-              <div className="menu-left">
-                <img src={Book} alt="book" style={{width:"40px"}}/>
-                <span>Years</span>
-              </div>
-              
-            </button>
-
-            {/* Speciality button (optional navigation) */}
-            <button className="menu-card">
-              <div className="menu-left">
-                <img src={Book} alt="book" style={{width:"40px"}} />
-                <span>Speciality</span>
-              </div>
-              
-            </button>
+          <div className="imaglittlBook">
+            <img 
+            src={littlBook} 
+            alt="littleBook"  />
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="footer">
-          <button className="cta" onClick={() => onNavigate("getStarted")}>Get Started</button>
-          <img
-            src={Illustration}
-            alt="Illustration"
-            className="illustration"
-          />
+          {/* <div className="imagliiitlleBook">
+            <img 
+            src={liiitlleBook} 
+            alt="liiitlleBook"  />
+          </div> */}
+          {/* Illustration */}
+          <div className="imagbook">
+            <img 
+            src={book} 
+            alt="book"  />
+          </div>
+          <div className="illustration">
+            <img src={girl} alt="student" />
+          </div>
+          
+          {/* Button */}
+          <button className="get-started"onClick={() => onNavigate()}>Get Started</button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default FirstPage;
-
-
-
-

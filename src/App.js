@@ -1,55 +1,84 @@
+// App.js
 import React, { useState } from "react";
 import FirstPage from "./firstPage";
-import SecondPage from "./secondePage";
 import ThirdPage from "./page3";
 import FieldSelection from "./page4";
-import Dashboard from "./page5";
-import LessonDetail from "./page6";
-import AlgorithmicQuiz from "./page7";
-import ExamsScreen from "./page17";
+import ModulesPage from "./ModulesPage";
+import ModuleDetailPage from "./ModuleDetailPage";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("first");
+    const [currentPage, setCurrentPage] = useState("first");
 
-  const go = (page) => setCurrentPage(page);
+    const [selectedSpeciality, setSelectedSpeciality] = useState(null);
+    const [selectedTechType, setSelectedTechType] = useState(null);
+    const [selectedYearId, setSelectedYearId] = useState(null);
+    const [selectedFieldId, setSelectedFieldId] = useState(null);
+    const [selectedModuleId, setSelectedModuleId] = useState(null);
 
-  return (
-    <>
-      {currentPage === "first" && <FirstPage onNavigate={() => go("second")} />}
-      {currentPage === "second" && <SecondPage onNavigate={() => go("third")} />}
-      {currentPage === "third" && <ThirdPage onNavigate={() => go("fourth")} />}
-      {currentPage === "fourth" && <FieldSelection onNavigate={() => go("five")} />}
+    const go = (page) => setCurrentPage(page);
 
-      {currentPage === "five" && (
-        <Dashboard
-          onCourse={() => go("six")}
-          onQuiz={() => go("seven")}
-          onModules={() => go("fourth")}
-          onExams={() => go("seventeen")}
-        />
-      )}
+    return (
+        <>
+        {currentPage === "first" && (
+            <FirstPage
+            onNavigate={(speciality) => {
+                setSelectedSpeciality(speciality);
+                go("third");
+            }}
+            />
+        )}
 
-      {currentPage === "six" && (
-        <LessonDetail
-          onNavigate={() => go("five")}
-          onQuiz={() => go("seven")}
-        />
-      )}
+        {currentPage === "third" && (
+            <ThirdPage
+            onNavigate={(yearId) => {
+                setSelectedYearId(yearId);
+                go("fourth");
+            }}
+            />
+        )}
 
-      {currentPage === "seven" && (
-        <AlgorithmicQuiz
-          onBack={() => go("five")}
-          onNext={() => go("seventeen")}
-        />
-      )}
 
-      {currentPage === "seventeen" && (
-        <ExamsScreen onBack={() => go("five")} />
-      )}
-    </>
-  );
+
+        {currentPage === "fourth" && (
+            <FieldSelection
+                yearId={selectedYearId}
+                onNavigate={(fieldId) => {
+                setSelectedFieldId(fieldId);
+                go("fifth");
+                }}
+                onBack={() => go("third")}
+            />
+            )}
+
+
+        {currentPage === "fifth" && (
+            <ModulesPage
+            fieldId={selectedFieldId}
+            onBack={() => go("fourth")}
+            onModuleClick={(moduleId) => {
+                setSelectedModuleId(moduleId);
+                go("moduleDetail");
+            }}
+            />
+        )}
+
+        {currentPage === "moduleDetail" && (
+            <ModuleDetailPage
+            moduleId={selectedModuleId}
+            onBack={() => go("fifth")}
+            />
+        )}
+        </>
+    );
 }
+
 export default App;
+
+
+
+
+
+
 
 
 

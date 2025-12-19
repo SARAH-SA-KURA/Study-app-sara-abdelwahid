@@ -1,180 +1,83 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import logo from "./assets/logo.png";
-import Illustration from "./assets/woman-7005175_1280.png";
 import Book from "./assets/Frame 6.png";
 
-const ThirdPage = ({ onNavigate }) => {
+export default function ThirdPage({ onNavigate }) {
+  const [years, setYears] = useState([]);
+
+  useEffect(() => {
+    fetch("https://podo.b1.ma/api/public/years")
+      .then((response) => response.json())
+      .then((json) => setYears(json.data))
+      .catch(() => console.log("We can't connect or read the data."));
+  }, []);
+
   return (
     <div className="page">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
-        * {
-          box-sizing: border-box;
-        }
-
-        body {
-          margin: 0;
-        }
-
-        /* Page background */
+      @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+        body { margin: 0; }
         .page {
           min-height: 100vh;
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #2f2f2f;
+          background: #2f2f2f;
+          
         }
-
-        /* App screen */
-        .app-screen {
+        .app {
           width: 430px;
           height: 932px;
-          background-color: #F0F3F3;
-          overflow: hidden;
-          position: relative;
+          background: linear-gradient(180deg, #2f7f77 -14%, #cfeae7 100%);
+          padding: 20px;
+          box-sizing: border-box;
+          overflow-y: auto;
         }
-
-        /* Header */
-        .header {
-          height: 70%;
-          width: 100%;
-          background-color: #6c8a83;
-          border-bottom-left-radius: 45px;
-          border-bottom-right-radius: 45px;
-          padding: 24px;
-          display: flex;
-          flex-direction: column;
+        .logo {
+          text-align: center;
         }
-
-        /* Status bar */
-        .status-bar {
-          display: flex;
-          justify-content: space-between;
-          font-size: 13px;
-          opacity: 0.7;
+        .logo img {
+          width: 250px;
         }
-
-        /* Logo */
-        .logo-container {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .logo-container img {
-          width: 280px;
-        }
-
-        /* Menu buttons */
-        .menu {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .menu-card {
-          height: 78px;
-          background-color: #4b605a;
-          border-radius: 22px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 24px;
+        .card {
+          background: #2c7d75;
           color: white;
-          border: none;
-          cursor: pointer;
-          font-family: 'Great Vibes', cursive;
-          font-size: 26px;
-          letter-spacing: 3px;
-        }
-
-        .menu-left {
+          padding: 20px;
+          border-radius: 20px;
+          margin-bottom: 20px;
+          font-family: "Handlee", cursive;
+          letter-spacing:3px;
+          font-size: 18px;
           display: flex;
           align-items: center;
-          gap: 14px;
-        }
-
-        /* Footer */
-        .footer {
-          position: absolute;
-          bottom: 0;
-          height: 30%;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .cta {
-          background-color: #4b605a;
-          color: white;
-          width: 280px;
-          margin-left: 120px;
-          margin-top: 70px;
-          font-family: 'Great Vibes', cursive;
-          font-size: 28px;
-          padding: 14px 48px;
-          border-radius: 60px;
-          border: none;
+          gap: 15px;
           cursor: pointer;
-          z-index: 2;
+          
         }
-
-        /* Illustration */
-        .illustration {
-          position: absolute;
-          right: 240px;
-          bottom: 70px;
-          width: 160px;
-          opacity: 0.9;
+        .card:hover {
+          background: #2f7f77;
         }
       `}</style>
 
-      <div className="app-screen">
-
-        {/* Header */}
-        <div className="header">
-
-
-          {/* Logo */}
-          <div className="logo-container">
-            <img src={logo} alt="Learnex Logo" />
-          </div>
-
-          {/* Menu */}
-          <div className="menu">
-            <button className="menu-card" onClick={onNavigate}>
-              <div className="menu-left">
-                <img src={Book} alt="book" style={{width:"40px"}} />
-                <span>Technician</span>
-              </div>
-            </button>
-
-            <button className="menu-card" onClick={onNavigate}>
-              <div className="menu-left">
-                <img src={Book} alt="book" style={{width:"40px"}} />
-                <span>Specialized technician</span>
-              </div>
-            </button>
-          </div>
-
+      <div className="app">
+        <div className="logo">
+          <img src={logo} alt="logo" />
         </div>
 
-        {/* Footer */}
-        <div className="footer">
-          <button className="cta">Get Started</button>
-          <img
-            src={Illustration}
-            alt="Illustration"
-            className="illustration"
-          />
-        </div>
-
+        {years.map((year) => (
+          <div
+            key={year.id}
+            className="card"
+            onClick={() => onNavigate(year.id)} // <-- IMPORTANT
+          >
+            <img className="bbbok" src={Book} width="40" alt="book"  />
+            {year.name}
+          </div>
+        ))}
       </div>
     </div>
   );
-};
+}
 
-export default ThirdPage ;
+
+
