@@ -8,6 +8,7 @@ export default function ModulesPage({ fieldId, onBack, onModuleClick, isLightMod
   const [effs, setEffs] = useState([]);
   const [search, setSearch] = useState(searchFilter || "");
   const [loadingModules, setLoadingModules] = useState(true);
+  const [loadingEffs, setLoadingEffs] = useState(false);
   const [activeTab, setActiveTab] = useState(defaultTab || "Modules");
 
   // Smaller icons for the more compact cards
@@ -56,9 +57,14 @@ export default function ModulesPage({ fieldId, onBack, onModuleClick, isLightMod
 
   const fetchEffs = () => {
     if (!fieldId) return;
+    setLoadingEffs(true);
     fetch(`https://podo.b1.ma/api/public/filieres/${fieldId}/effs`)
       .then((res) => res.json())
-      .then((json) => setEffs(json.data || []));
+      .then((json) => {
+        setEffs(json.data || []);
+        setLoadingEffs(false);
+      })
+      .catch(() => setLoadingEffs(false));
   };
 
   const handleTabClick = (tab) => {
@@ -549,6 +555,19 @@ export default function ModulesPage({ fieldId, onBack, onModuleClick, isLightMod
           background: rgba(46, 125, 117, 0.2); 
           border-radius: 10px; 
         }
+        .loading-text {
+          text-align: center;
+          padding: 40px 20px;
+          font-size: 15px;
+        }
+
+        .dark-mode .loading-text {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .light-mode .loading-text {
+          color: #5a9e96;
+        }
       `}</style>
 
       <div className="theme-toggle" onClick={toggleTheme}>
@@ -602,7 +621,12 @@ export default function ModulesPage({ fieldId, onBack, onModuleClick, isLightMod
         </div>
 
         <div className="scroll-grid">
-          {filteredItems.map((item) => (
+          {(activeTab === "Modules" ? loadingModules : loadingEffs) ? (
+            <div className="loading-text">Chargement...</div>
+          ) : filteredItems.length === 0 ? (
+            <div className="loading-text">Aucun résultat trouvé</div>
+          ) : (
+            filteredItems.map((item) => (
             <div key={item.id} className="compact-card" onClick={() => activeTab === "Modules" && onModuleClick(item.id)}>
               <div className="icon-inner">
                 {activeTab === "Modules" ? getFieldIcon(item.name || item.title) : <Icons.FileText />}
@@ -624,7 +648,8 @@ export default function ModulesPage({ fieldId, onBack, onModuleClick, isLightMod
                 </a>
               )}
             </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
