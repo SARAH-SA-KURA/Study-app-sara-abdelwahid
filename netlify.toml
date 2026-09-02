@@ -1,0 +1,18 @@
+# Netlify config. Settings here take precedence over the values in the
+# Netlify UI, so the build no longer depends on them being set correctly.
+
+[build]
+  command = "npm run build"
+  # Vite outputs to dist/, not CRA's build/.
+  publish = "dist"
+
+[build.environment]
+  # Vite 7 requires node ^20.19.0 || >=22.12.0.
+  NODE_VERSION = "22"
+
+# The SEO routes (/efm-react-pdf, /filieres-ofppt, ...) are client-side only.
+# Without this, loading one directly returns 404 instead of the app.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
