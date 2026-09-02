@@ -10,6 +10,11 @@
 
 # production
 /build
+/dist
+dist.rar
+
+# tooling
+/.superpowers
 
 # misc
 .DS_Store
